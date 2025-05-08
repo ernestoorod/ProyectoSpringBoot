@@ -2,47 +2,50 @@ package com.proyecto.service.usuario;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.model.usuario.UsuarioVO;
+import com.proyecto.repository.usuario.UsuarioRepository;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @Override
-    public UsuarioVO crear(UsuarioVO usuarioVO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crear'");
+    public void crear(UsuarioVO usuario) {
+        usuarioRepository.save(usuario);
     }
 
     @Override
-    public UsuarioVO actualizar(UsuarioVO usuarioVO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    public void actualizar(UsuarioVO usuario) {
+        usuarioRepository.save(usuario);
     }
 
     @Override
     public void eliminar(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        usuarioRepository.deleteById(id);
     }
 
     @Override
     public UsuarioVO obtenerPorId(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerPorId'");
+        return usuarioRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<UsuarioVO> listarUsuarios() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarUsuarios'");
+        return usuarioRepository.findAll();
     }
 
     @Override
     public UsuarioVO autenticar(String nombreUsuario, String contrasena) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'autenticar'");
+        UsuarioVO usuario = usuarioRepository.findByNombreUsuario(nombreUsuario);
+        if (usuario != null && usuario.getContrasena().equals(contrasena)) {
+            return usuario;
+        }
+        return null;
     }
 
 }

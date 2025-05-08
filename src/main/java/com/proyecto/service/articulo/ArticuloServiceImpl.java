@@ -2,41 +2,41 @@ package com.proyecto.service.articulo;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.model.articulo.ArticuloVO;
+import com.proyecto.repository.articulo.ArticuloRepository;
 
 @Service
 public class ArticuloServiceImpl implements ArticuloService {
 
+    @Autowired
+    private ArticuloRepository articuloRepository;
+
     @Override
-    public ArticuloVO crear(ArticuloVO articuloVO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crear'");
+    public void crear(ArticuloVO articulo) {
+        articuloRepository.save(articulo);
     }
 
     @Override
-    public ArticuloVO actualizar(ArticuloVO articuloVO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    public void actualizar(ArticuloVO articulo) {
+        articuloRepository.save(articulo);
     }
 
     @Override
     public void eliminar(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        articuloRepository.deleteById(id);
     }
 
     @Override
     public ArticuloVO obtenerPorId(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerPorId'");
+        return articuloRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<ArticuloVO> listarArticulos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarArticulos'");
+        return articuloRepository.findAll();
     }  
 
 }

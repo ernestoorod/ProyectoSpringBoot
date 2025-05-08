@@ -16,7 +16,7 @@ public interface UsuarioService {
      * @param usuarioVO Objeto que contiene la información del usuario a crear.
      * @return El usuario creado con su ID generado.
      */
-    public UsuarioVO crear(UsuarioVO usuarioVO);
+    public void crear(UsuarioVO usuario);
 
     /**
      * Actualiza la información de un usuario existente.
@@ -24,7 +24,7 @@ public interface UsuarioService {
      * @param usuarioVO Objeto con los datos actualizados del usuario.
      * @return El usuario actualizado.
      */
-    public UsuarioVO actualizar(UsuarioVO usuarioVO);
+    public void actualizar(UsuarioVO usuario);
 
     /**
      * Elimina un usuario del sistema según su ID.

@@ -16,7 +16,7 @@ public interface ArticuloService {
      * @param articuloVO Objeto que contiene la información del artículo a crear.
      * @return El artículo creado con su ID generado.
      */
-    public ArticuloVO crear(ArticuloVO articuloVO);
+    public void crear(ArticuloVO articulo);
 
     /**
      * Actualiza la información de un artículo existente.
@@ -24,7 +24,7 @@ public interface ArticuloService {
      * @param articuloVO Objeto con los datos actualizados del artículo.
      * @return El artículo actualizado.
      */
-    public ArticuloVO actualizar(ArticuloVO articuloVO);
+    public void actualizar(ArticuloVO articulo);
 
     /**
      * Elimina un artículo del sistema según su ID.
