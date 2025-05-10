@@ -1,45 +1,95 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Perfil</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-*****"
+        crossorigin="anonymous">
 </head>
-<body>
-    <a th:href="@{/}">Inicio</a>
+<body class="d-flex flex-column min-vh-100">
 
-    <h1>Perfil de usuario</h1>
-    <div th:if="${usuario != null}">
-        
-        <p><strong>Nombre:</strong>
-            <span th:text="${usuario.nombre}"></span>
-            <span th:text="${usuario.apellidos}"></span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Gestión de Artículos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNav" aria-controls="mainNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+            <!-- forzamos siempre fila y añadimos un poco de espacio entre ítems -->
+            <ul class="navbar-nav ms-auto flex-row">
+                <li class="nav-item me-3">
+                <a class="nav-link" th:href="@{/}">Inicio</a>
+                </li>
+                <li class="nav-item me-3" th:if="${session.usuarioLogueado}">
+                <a class="nav-link" th:href="@{/usuario/perfil}">Perfil</a>
+                </li>
+                <li class="nav-item me-3" th:if="${session.usuarioLogueado}">
+                <a class="nav-link" th:href="@{/usuario/logout}">Cerrar Sesión</a>
+                </li>
+                <li class="nav-item me-3" th:unless="${session.usuarioLogueado}">
+                <a class="nav-link" th:href="@{/usuario/login}">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item" th:unless="${session.usuarioLogueado}">
+                <a class="nav-link" th:href="@{/usuario/registro}">Registrarse</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <button type="button" class="btn btn-secondary" onclick="history.back()">
+        ← Volver
+    </button>
+  <main class="container my-5 flex-grow-1">
+    <div class="card">
+      <div class="card-header">
+        <h2>Perfil de Usuario</h2>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Nombre:</strong>
+          <span th:text="${usuario.nombre}"></span>
+          <span th:text="${usuario.apellidos}"></span>
+        </li>
+        <li class="list-group-item"><strong>Usuario:</strong>
+          <span th:text="${usuario.nombreUsuario}"></span>
+        </li>
+        <li class="list-group-item"><strong>Email:</strong>
+          <span th:text="${usuario.email}"></span>
+        </li>
+        <li class="list-group-item"><strong>Teléfono:</strong>
+          <span th:text="${usuario.telefono}"></span>
+        </li>
+        <li class="list-group-item"><strong>Rol:</strong>
+          <span th:text="${usuario.rol}"></span>
+        </li>
+      </ul>
+      <div class="card-body">
+        <p th:if="${usuario.rol == 'ADMIN' or usuario.rol == 'SUPERADMIN'}">
+          <a class="btn btn-outline-primary" th:href="@{/articulos}">Gestionar Artículos</a>
         </p>
-
-        <p><strong>Usuario:</strong>
-            <span th:text="${usuario.nombreUsuario}"></span>
-        </p>
-
-        <p><strong>Email:</strong>
-            <span th:text="${usuario.email}"></span>
-        </p>
-
-        <p><strong>Teléfono:</strong>
-            <span th:text="${usuario.telefono}"></span>
-        </p>
-
+         <div th:if="${usuario.rol == 'SUPERADMIN'}" class="mb-2">
+            <a class="btn btn-outline-secondary" th:href="@{/usuario/cambiorol}">
+            Cambiar Rol
+            </a>
+        </div>
+        <a class="btn btn-primary" th:href="@{/usuario/editar}">Editar Perfil</a>
+        <a class="btn btn-danger" th:href="@{/usuario/eliminar/{id}(id=${usuario.id})}"
+           onclick="return confirm('¿Eliminar tu cuenta?');">Eliminar Cuenta</a>
+      </div>
     </div>
+  </main>
 
-    <p th:if="${usuario.rol == 'ADMIN' or usuario.rol == 'SUPERADMIN'}">
-        <a th:href="@{/articulos}">Gestionar Artículos</a>
-    </p>
+  <footer class="bg-light text-center py-3 mt-auto">
+    <div class="container">&copy; 2025 Mi Aplicación de Artículos</div>
+  </footer>
 
-    <p th:if="${usuario.rol == 'SUPERADMIN'}">
-        <a th:href="@{/usuario/cambiorol}">Cambiar el rol</a>
-    </p>
-
-    <a th:href="@{/usuario/editar}">Editar Perfil</a> |
-    <a th:href="@{/usuario/eliminar/{id}(id=${usuario.id})}"
-       onclick="return confirm('¿Eliminar tu cuenta?');">Eliminar Cuenta</a>
-    <hr/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-*****"
+          crossorigin="anonymous"></script>
 </body>
 </html>
