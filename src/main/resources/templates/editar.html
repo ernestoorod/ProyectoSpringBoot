@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Perfil</title>
+</head>
+<body>
+    <h1>Editar Perfil</h1>
+    <form th:action="@{/usuario/actualizar}" method="post">
+        <input type="hidden" name="id" th:value="${usuario.id}" />
+
+        <input type="text" name="nombre" th:value="${usuario.nombre}" placeholder="Nombre" required />
+        <input type="text" name="apellidos" th:value="${usuario.apellidos}" placeholder="Apellidos" required />
+        <input type="text" name="nombreUsuario" th:value="${usuario.nombreUsuario}" placeholder="Usuario" required />
+        <input type="password" name="contrasena" placeholder="Nueva Contraseña" />
+        <input type="email" name="email" th:value="${usuario.email}" placeholder="Email" required />
+        <input type="text" name="telefono" th:value="${usuario.telefono}" placeholder="Teléfono" />
+        <input type="text" name="rol" th:value="${usuario.rol}" placeholder="Rol" required />
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <p><a th:href="@{/usuario/perfil}">← Volver al perfil</a></p>
+</body>
+</html>

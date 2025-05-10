@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+</head>
+<body>
+    <h1>Perfil de Usuario</h1>
+    <p><strong>Nombre:</strong> <span th:text="${usuario.nombre}"></span> <span th:text="${usuario.apellidos}"></span></p>
+    <p><strong>Usuario:</strong> <span th:text="${usuario.nombreUsuario}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
+    <p><strong>Teléfono:</strong> <span th:text="${usuario.telefono}"></span></p>
+    <p><strong>Rol:</strong> <span th:text="${usuario.rol}"></span></p>
+
+    <a th:href="@{/usuario/editar}">✏️ Editar Perfil</a> |
+    <a th:href="@{/usuario/eliminar/{id}(id=${usuario.id})}"
+       onclick="return confirm('¿Eliminar tu cuenta?');">🗑️ Eliminar Cuenta</a>
+    <hr/>
+    <p><a th:href="@{/articulos}">👉 Ir a Artículos</a></p>
+</body>
+</html>

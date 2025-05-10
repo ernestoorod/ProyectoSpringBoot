@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+        header, nav, main {
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #3366cc;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #333;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: #3366cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .btn:hover {
+            background: #254a99;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido a la Gestión de Artículos</h1>
+        <p>Desde aquí puedes navegar por la aplicación.</p>
+    </header>
+
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/usuario/login}">Iniciar Sesión</a>
+        <a th:href="@{/usuario/registro}">Registrarse</a>
+        <a th:href="@{/articulos}">Ver Artículos</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>¿Qué quieres hacer?</h2>
+            <ul>
+                <li><a class="btn" th:href="@{/usuario/login}">Entrar a mi cuenta</a></li>
+                <li><a class="btn" th:href="@{/usuario/registro}">Crear nueva cuenta</a></li>
+                <li><a class="btn" th:href="@{/articulos}">Gestionar artículos</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mi Aplicación de Artículos</p>
+    </footer>
+</body>
+</html>
