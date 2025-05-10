@@ -23,14 +23,35 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void actualizar(UsuarioVO usuario) {
-        UsuarioVO existente = usuarioRepository.findById(usuario.getId()).orElse(null);
-        if (existente != null) {
-            if (!BCrypt.checkpw(usuario.getContrasena(), existente.getContrasena())) {
-                usuario.setContrasena(BCrypt.hashpw(usuario.getContrasena(), BCrypt.gensalt()));
+    public void actualizar(UsuarioVO usuarioForm) {
+        // 1) Recupera el usuario existente
+        UsuarioVO existente = usuarioRepository.findById(usuarioForm.getId())
+            .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+        // 2) Campos obligatorios que siempre se actualizan
+        existente.setNombre(usuarioForm.getNombre());
+        existente.setApellidos(usuarioForm.getApellidos());
+        existente.setNombreUsuario(usuarioForm.getNombreUsuario());
+        existente.setEmail(usuarioForm.getEmail());
+        existente.setTelefono(usuarioForm.getTelefono());
+
+        // 3) Rol: solo cambiamos si nos han enviado uno nuevo
+        String nuevoRol = usuarioForm.getRol();
+        if (nuevoRol != null && !nuevoRol.isBlank()) {
+            existente.setRol(nuevoRol);
+        }
+
+        // 4) Contraseña: igual, solo rehaseamos si han puesto una distinta
+        String nuevaPass = usuarioForm.getContrasena();
+        if (nuevaPass != null && !nuevaPass.isBlank()) {
+            if (!BCrypt.checkpw(nuevaPass, existente.getContrasena())) {
+                String hash = BCrypt.hashpw(nuevaPass, BCrypt.gensalt());
+                existente.setContrasena(hash);
             }
         }
-        usuarioRepository.save(usuario);
+
+        // 5) Persistimos cambios
+        usuarioRepository.save(existente);
     }
 
     @Override
@@ -56,4 +77,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return null;
     }
+
+    @Override
+    public void cambiarRol(Integer id, String nuevoRol) {
+        UsuarioVO u = usuarioRepository.findById(id).orElseThrow();
+        u.setRol(nuevoRol);
+        usuarioRepository.save(u);
+    }
+
 }

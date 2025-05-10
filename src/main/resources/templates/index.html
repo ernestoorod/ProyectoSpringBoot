@@ -3,41 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Página Principal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 0 20px;
-            line-height: 1.6;
-        }
-        header, nav, main {
-            margin-bottom: 20px;
-        }
-        nav a {
-            margin-right: 15px;
-            text-decoration: none;
-            color: #3366cc;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1 {
-            color: #333;
-        }
-        .btn {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 10px 15px;
-            background: #3366cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        .btn:hover {
-            background: #254a99;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -46,25 +11,57 @@
     </header>
 
     <nav>
-        <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/}">Inicio</a>
+
+    <span th:if="${session.usuarioLogueado}">
+        <a th:href="@{/usuario/perfil}">Perfil</a>
+        <a th:href="@{/usuario/logout}">Cerrar Sesión</a>
+    </span>
+
+    <span th:unless="${session.usuarioLogueado}">
         <a th:href="@{/usuario/login}">Iniciar Sesión</a>
         <a th:href="@{/usuario/registro}">Registrarse</a>
-        <a th:href="@{/articulos}">Ver Artículos</a>
-    </nav>
+    </span>
+</nav>
+
 
     <main>
-        <section>
-            <h2>¿Qué quieres hacer?</h2>
-            <ul>
-                <li><a class="btn" th:href="@{/usuario/login}">Entrar a mi cuenta</a></li>
-                <li><a class="btn" th:href="@{/usuario/registro}">Crear nueva cuenta</a></li>
-                <li><a class="btn" th:href="@{/articulos}">Gestionar artículos</a></li>
-            </ul>
-        </section>
+        <h2>Artículos</h2>
+        <div id="article-list">Cargando artículos…</div>
     </main>
 
     <footer>
         <p>&copy; 2025 Mi Aplicación de Artículos</p>
     </footer>
+
+    <script>
+        const apiUrl = '/api/articulos';
+
+        async function loadArticles() {
+            const res = await fetch(apiUrl);
+            const articles = await res.json();
+            const container = document.getElementById('article-list');
+            if (!articles.length) {
+                container.innerHTML = '<p>No hay artículos disponibles.</p>';
+                return;
+            }
+            container.innerHTML = '';
+            articles.forEach(a => {
+                const div = document.createElement('div');
+                div.style.border = '1px solid #ccc';
+                div.style.padding = '1rem';
+                div.style.marginBottom = '1rem';
+                div.innerHTML = `
+                    <h3>${a.nombre}</h3>
+                    <p>${a.descripcion}</p>
+                    <p>Precio: ${a.precio.toFixed(2)} € | Stock: ${a.stock} | Activo: ${a.activo ? 'Sí' : 'No'}</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Cargar lista al cargar la página
+        document.addEventListener('DOMContentLoaded', loadArticles);
+    </script>
 </body>
 </html>

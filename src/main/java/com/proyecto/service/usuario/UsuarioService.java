@@ -56,5 +56,7 @@ public interface UsuarioService {
      * @return El usuario autenticado si las credenciales son válidas, de lo contrario null.
      */
     public UsuarioVO autenticar(String nombreUsuario, String contrasena);
-    
+
+
+    public void cambiarRol(Integer id, String nuevoRol);
 }

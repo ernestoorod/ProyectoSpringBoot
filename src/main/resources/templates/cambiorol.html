@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cambio de Rol</title>
+</head>
+<body>
+    <a th:href="@{/usuario/perfil}">Volver al perfil</a>
+    <h1>Asignar nuevo rol</h1>
+    <table>
+        <tr>
+        <th>Usuario</th>
+        <th>Rol actual</th>
+        <th>Nuevo rol</th>
+        </tr>
+        <tr th:each="u : ${usuarios}" th:if="${u.rol} != 'SUPERADMIN'">
+        <td th:text="${u.nombreUsuario}">usuario</td>
+        <td th:text="${u.rol}">ROL</td>
+        <td>
+            <form th:action="@{/usuario/cambiorol}" method="post">
+            <input type="hidden" name="usuarioId" th:value="${u.id}" />
+            <select name="nuevoRol" required>
+                <option th:selected="${u.rol=='USER'}" value="USER">USER</option>
+                <option th:selected="${u.rol=='ADMIN'}" value="ADMIN">ADMIN</option>
+            </select>
+            <button type="submit">Cambiar</button>
+            </form>
+        </td>
+        </tr>
+    </table>
+</body>
+</html>
