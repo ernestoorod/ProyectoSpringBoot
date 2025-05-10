@@ -59,4 +59,6 @@ public interface UsuarioService {
 
 
     public void cambiarRol(Integer id, String nuevoRol);
+
+    boolean existeNombreUsuario(String nombreUsuario);
 }

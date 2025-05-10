@@ -43,48 +43,48 @@
         </div>
     </nav>
 
-    <button type="button" class="btn btn-secondary" onclick="history.back()">
+    <a href="javascript:history.back()" class="btn">
         ← Volver
-    </button>
-  <main class="container my-5 flex-grow-1">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1>Artículos</h1>
-    </div>
-    <div id="article-list" class="row row-cols-1 row-cols-md-2 g-3 mb-5"></div>
+    </a>
+    <main class="container my-5 flex-grow-1">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Artículos</h1>
+        </div>
+        <div id="article-list" class="row row-cols-1 row-cols-md-2 g-3 mb-5"></div>
 
-    <h2>Crear Artículo</h2>
-    <form id="create-article-form" class="row g-3">
-      <div class="col-md-6">
-        <input type="text" id="nombre" class="form-control" placeholder="Nombre" required>
-      </div>
-      <div class="col-md-6">
-        <input type="text" id="descripcion" class="form-control" placeholder="Descripción" required>
-      </div>
-      <div class="col-md-3">
-        <input type="number" id="precio" step="0.01" class="form-control" placeholder="Precio" required>
-      </div>
-      <div class="col-md-3">
-        <input type="number" id="stock" class="form-control" placeholder="Stock" required>
-      </div>
-      <div class="col-md-3 form-check">
-        <input class="form-check-input" type="checkbox" id="activo">
-        <label class="form-check-label" for="activo">Activo</label>
-      </div>
-      <div class="col-md-3">
-        <button type="submit" class="btn btn-primary w-100">Crear</button>
-      </div>
-    </form>
-  </main>
+        <h2>Crear Artículo</h2>
+        <form id="create-article-form" class="row g-3">
+        <div class="col-md-6">
+            <input type="text" id="nombre" class="form-control" placeholder="Nombre" required>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="descripcion" class="form-control" placeholder="Descripción" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="precio" step="0.01" class="form-control" placeholder="Precio" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="stock" class="form-control" placeholder="Stock" required>
+        </div>
+        <div class="col-md-3 form-check">
+            <input class="form-check-input" type="checkbox" id="activo">
+            <label class="form-check-label" for="activo">Activo</label>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary w-100">Crear</button>
+        </div>
+        </form>
+    </main>
 
-  <footer class="bg-light text-center py-3 mt-auto">
-    <div class="container">
-      &copy; 2025 Mi Aplicación de Artículos
-    </div>
-  </footer>
+    <footer class="bg-light text-center py-3 mt-auto">
+        <div class="container">
+        &copy; 2025 Mi Aplicación de Artículos
+        </div>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-*****"
-          crossorigin="anonymous"></script>
-  <script th:src="@{/js/articulos.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-*****"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/js/articulos.js}"></script>
 </body>
 </html>

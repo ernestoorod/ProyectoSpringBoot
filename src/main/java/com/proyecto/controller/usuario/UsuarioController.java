@@ -4,7 +4,9 @@ import com.proyecto.model.usuario.UsuarioVO;
 import com.proyecto.service.usuario.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,6 +122,14 @@ public class UsuarioController {
                         @RequestParam("nuevoRol") String nuevoRol) {
     usuarioService.cambiarRol(id, nuevoRol);
     return "redirect:/usuario/cambiorol";
+    }
+
+
+    @GetMapping("/checkUsername")
+    @ResponseBody
+    public Map<String, Boolean> checkUsername(@RequestParam("nombreUsuario") String nombreUsuario) {
+        boolean exists = usuarioService.existeNombreUsuario(nombreUsuario);
+        return Collections.singletonMap("exists", exists);
     }
 
 

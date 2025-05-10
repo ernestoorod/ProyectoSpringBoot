@@ -85,4 +85,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.save(u);
     }
 
+    @Override
+    public boolean existeNombreUsuario(String nombreUsuario) {
+        return usuarioRepository.findByNombreUsuario(nombreUsuario) != null;
+    }
+
 }

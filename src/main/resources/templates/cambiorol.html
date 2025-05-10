@@ -42,47 +42,47 @@
         </div>
     </nav>
 
-    <button type="button" class="btn btn-secondary" onclick="history.back()">
+    <a href="javascript:history.back()" class="btn">
         ← Volver
-    </button>
-  <main class="container my-5 flex-grow-1">
-    <h1 class="mb-4">Asignar nuevo rol</h1>
-    <div class="table-responsive">
-      <table class="table table-striped align-middle">
-        <thead>
-          <tr>
-            <th>Usuario</th>
-            <th>Rol actual</th>
-            <th>Nuevo rol</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="u : ${usuarios}" th:if="${u.rol} != 'SUPERADMIN'">
-            <td th:text="${u.nombreUsuario}">usuario</td>
-            <td th:text="${u.rol}">ROL</td>
-            <td>
-              <form th:action="@{/usuario/cambiorol}" method="post" class="d-flex">
-                <input type="hidden" name="usuarioId" th:value="${u.id}" />
-                <select name="nuevoRol" class="form-select me-2" required>
-                  <option th:selected="${u.rol=='USER'}" value="USER">USER</option>
-                  <option th:selected="${u.rol=='ADMIN'}" value="ADMIN">ADMIN</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Cambiar</button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
+    </a>
+    <main class="container my-5 flex-grow-1">
+        <h1 class="mb-4">Asignar nuevo rol</h1>
+        <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Rol actual</th>
+                <th>Nuevo rol</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${usuarios}" th:if="${u.rol} != 'SUPERADMIN'">
+                <td th:text="${u.nombreUsuario}">usuario</td>
+                <td th:text="${u.rol}">ROL</td>
+                <td>
+                <form th:action="@{/usuario/cambiorol}" method="post" class="d-flex">
+                    <input type="hidden" name="usuarioId" th:value="${u.id}" />
+                    <select name="nuevoRol" class="form-select me-2" required>
+                    <option th:selected="${u.rol=='USER'}" value="USER">USER</option>
+                    <option th:selected="${u.rol=='ADMIN'}" value="ADMIN">ADMIN</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Cambiar</button>
+                </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </main>
 
-  <footer class="bg-light text-center py-3 mt-auto">
-    <div class="container">&copy; 2025 Mi Aplicación de Artículos</div>
-  </footer>
+    <footer class="bg-light text-center py-3 mt-auto">
+        <div class="container">&copy; 2025 Mi Aplicación de Artículos</div>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-*****"
-          crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-*****"
+            crossorigin="anonymous"></script>
 </body>
 </html>
