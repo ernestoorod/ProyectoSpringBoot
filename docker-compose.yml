@@ -1,28 +1,7 @@
+version: '3.8'
+
 services:
   app:
     build: .
     ports:
       - "8080:8080"
-    depends_on:
-      - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/proyecto?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: ernesto
-      SPRING_DATASOURCE_PASSWORD: 1234
-
-  mysql:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: proyecto
-      MYSQL_USER: ernesto 
-      MYSQL_PASSWORD: 1234
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysqldata:/var/lib/mysql
-      - ./docker/mysql/init:/docker-entrypoint-initdb.d
-
-volumes:
-  mysqldata:
